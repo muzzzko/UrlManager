@@ -16,17 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 $app->register(new DoctrineServiceProvider(),   [
     'db.options' => [
           'driver' => 'pdo_mysql',
-<<<<<<< HEAD
           'host' => 'localhost',
           'dbname' => 'UrlManager',
           'user' => 'root',
           'password' => '181295egor',
-=======
-          'host' => '127.0.0.1',
-          'dbname' => 'UrlManager',
-          'user' => 'root',
-          'password' => 'root',
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
           'charset' => 'utf8'
     ]
 ]);
@@ -68,7 +61,6 @@ $app['shortenUrls.repository'] = function ($app) {
     return new UrlRepository($app['db']);
 };
 
-<<<<<<< HEAD
 $app['transitions.controller'] = function ($app) {
     return new TransitionController(
         $app['users.service'],
@@ -77,8 +69,6 @@ $app['transitions.controller'] = function ($app) {
     );
 };
 
-=======
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
 $app['transitions.service'] = function ($app) {
     return new TransitionService($app['transitions.repository']);
 };
@@ -92,16 +82,11 @@ $users = $app['controllers_factory'];
 $users->post('/users','users.controller:register');
 $users->get('/users/me','users.controller:getUser');
 
-<<<<<<< HEAD
 $app->mount('/api/v1', $users);
-=======
-$app->mount('/api/v1',$users);
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
 
 $shortenUrls = $app['controllers_factory'];
 
 $shortenUrls->post('/users/me/shorten_urls','shortenUrls.controller:createUserShortenUrl');
-<<<<<<< HEAD
 $shortenUrls->get('/users/me/shorten_urls','shortenUrls.controller:getAllUserShortenUrls');
 $shortenUrls->get('/users/me/shorten_urls/{id}','shortenUrls.controller:getUserShortenUrl')
             ->assert('id','\d+');
@@ -129,7 +114,3 @@ $transitions->get(
 
 
 $app->mount('/api/v1', $transitions);
-=======
-
-$app->mount('/api/v1',$shortenUrls);
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446

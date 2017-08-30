@@ -1,10 +1,7 @@
 <?php
 namespace UrlManager\Services;
 
-<<<<<<< HEAD
 use UrlManager\Models\User;
-=======
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
 use UrlManager\Repositories\TransitionRepository;
 
 class TransitionService
@@ -20,7 +17,7 @@ class TransitionService
 
 
 
-<<<<<<< HEAD
+
     public function getCountTransitionsUserShortenUrl($id)
     {
         return $this->transitionRepository->getCountTransitionsUserShortenUrl($id);
@@ -31,18 +28,10 @@ class TransitionService
         $dateTo,
         $id,
         $dateFormat)
-=======
-    public function getCountTransitionsPeriod(
-        $dateFrom,
-        $dateTo,
-        $hash,
-        $dateFromat)
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
     {
         return $this->transitionRepository->getCountTransitionsPeriod(
           $dateFrom,
           $dateTo,
-<<<<<<< HEAD
           $id,
           $dateFormat);
     }
@@ -55,19 +44,5 @@ class TransitionService
     public function fixTransition($id)
     {
         $this->transitionRepository->fixTransition($id);
-=======
-          $hash,
-          $dateFormat);
-    }
-
-    public function getTopReferer()
-    {
-        return $this->TransitionRepository->getTopReferer();
-    }
-
-    public function fixTransition($hash)
-    {
-        $this->TransitionRepository->fixTransition($hash);
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
     }
 }

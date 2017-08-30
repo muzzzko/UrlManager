@@ -51,8 +51,8 @@ class UrlRepository extends AbstractRepository
     public function getUserShortenUrlById(User $user, $id)
     {
         $row = $this->dbConnection->fetchAssoc(
-            'select sourceUrl, id, hash from Urls where id = ?',
-            [$id]
+            'select sourceUrl, id, hash from Urls where id = ? and userId = ?',
+            [$id, $user->getId()]
         );
 
         if ($row == null) return $row;

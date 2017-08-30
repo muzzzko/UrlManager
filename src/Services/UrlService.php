@@ -8,10 +8,6 @@ use UrlManager\Models\User;
 
 class UrlService
 {
-<<<<<<< HEAD
-
-=======
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
     private $urlRepository;
 
 
@@ -23,16 +19,10 @@ class UrlService
 
 
 
-<<<<<<< HEAD
+
     public function createUserShortenUrl($sourceUrl, User $user)
     {
         $shortenUrl = new ShortenUrl(
-=======
-    public function createUserShortenUrl(User $user, $sourceUrl)
-    {
-        $shortenUrl = new ShortenUrl(
-            md5($sourceUrl . mt_rand(),true),
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
             $sourceUrl,
             $user
         );
@@ -42,7 +32,6 @@ class UrlService
         return $shortenUrl;
     }
 
-<<<<<<< HEAD
     public function getAllUserShortenUrls(User $user)
     {
         return $this->urlRepository->getAllUserShortenUrls($user);
@@ -61,22 +50,5 @@ class UrlService
     public function getShortenUrlByHash($hash)
     {
         return $this->urlRepository->getShortenUrlByHash($hash);
-=======
-    public function getAllUserShortenUrl($email)
-    {
-        return $this->urlRepository->getAllUserShortenUrl($user);
-    }
-
-    public function getUserShortenUrl($email, $id)
-    {
-        $shortenUrl = $this->urlRepository->getUserShortenUrl($user, $id);
-
-        return $shortenUrl;
-    }
-
-    public function deleteUserShortenUrl($email, $id)
-    {
-        return $this->urlRepository->deleteUserShortenUrl($user, $id);
->>>>>>> bbf0a2dd6575f750ea739db6c81e11843ddae446
     }
 }
