@@ -15,9 +15,6 @@ class User
         if ($name === '')
             throw new \InvalidArgumentException('Name is clear');
 
-        if (strlen($password->getPassword()) < 6)
-            throw new \InvalidArgumentException('Length of password must be at least 6 characters');
-
         if (!filter_var($email,FILTER_VALIDATE_EMAIL))
           throw new \InvalidArgumentException('Email is wrong');
 

@@ -10,6 +10,9 @@ class Password
 
     public function __construct($password, $hash = true)
     {
+        if (strlen($password)< 6)
+            throw new \InvalidArgumentException('Length of password must be at least 6 characters');
+
         if ($hash)
         {
             $this->password = hash('md5',(hash('md5',$password).$this->salt));
