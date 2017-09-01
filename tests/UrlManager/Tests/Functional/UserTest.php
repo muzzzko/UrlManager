@@ -64,7 +64,7 @@ class UserTest extends WebTestCase
         return [
             [
                 '{
-                      "email":"test@gmail.com",
+                      "email":"test1@gmail.com",
                       "name":"",
                       "password":"password"
                 }',
@@ -72,14 +72,14 @@ class UserTest extends WebTestCase
             ],
             [
                 '{
-                    "email":"test@gmail.com",
+                    "email":"test1@gmail.com",
                     "name":"name",
                     "password":"passw"}',
                 Response::HTTP_UNPROCESSABLE_ENTITY
             ],
             [
                 '{
-                    "email":"test@",
+                    "email":"test1@",
                     "name":"name",
                     "password":"password"
                 }',
@@ -95,7 +95,7 @@ class UserTest extends WebTestCase
             ],
             [
                 '{
-                    "email":"test@gmail.com",
+                    "email":"test1@gmail.com",
                     "name":"name",
                     "password":"password"
                 }',

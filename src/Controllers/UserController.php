@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Silex\Application;
 use UrlManager\Services\UserService;
 use Doctrine\DBAL\DBALException;
-use UrlManager\Models\Password;
 
 class UserController extends AbstractController
 {
@@ -17,7 +16,7 @@ class UserController extends AbstractController
         {
             $user = $this->userService->createUser(
                 $request->get('name'),
-                new Password($request->get('password')),
+                $request->get('password'),
                 $request->get('email')
             );
         } catch(DBALException $e) {
