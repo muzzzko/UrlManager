@@ -24,7 +24,7 @@ class AbstractController
     protected function getUserByAuthorization(Request $request)
     {
         $email = $request->server->get('PHP_AUTH_USER');
-        $password = new Password($request->server->get('PHP_AUTH_PW'));
+        $password = new Password($request->server->get('PHP_AUTH_PW'), true, false);
 
         $user = $this->userService->getUserByEmail($email);
 

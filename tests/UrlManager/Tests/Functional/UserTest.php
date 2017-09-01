@@ -71,7 +71,10 @@ class UserTest extends WebTestCase
                 Response::HTTP_UNPROCESSABLE_ENTITY
             ],
             [
-                '{"email":"test1@gmail.com","name":"name","password":""}',
+                '{
+                    "email":"test@gmail.com",
+                    "name":"name",
+                    "password":"passw"}',
                 Response::HTTP_UNPROCESSABLE_ENTITY
             ],
             [
@@ -92,7 +95,7 @@ class UserTest extends WebTestCase
             ],
             [
                 '{
-                    "email":"test1@gmail.com",
+                    "email":"test@gmail.com",
                     "name":"name",
                     "password":"password"
                 }',
@@ -134,7 +137,7 @@ class UserTest extends WebTestCase
                 [
                     'CONTENT_TYPE' => 'application/json',
                     'PHP_AUTH_USER' => 'test2@gmail.com',
-                    'PHP_AUTH_PW' => 'passwsdfsd'
+                    'PHP_AUTH_PW' => 'pas'
                 ],
                 Response::HTTP_UNAUTHORIZED
             ],

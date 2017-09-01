@@ -8,9 +8,9 @@ class Password
 
 
 
-    public function __construct($password, $hash = true)
+    public function __construct($password, $hash = true, $register = true)
     {
-        if (strlen($password)< 6)
+        if (strlen($password)< 6 && $register)
             throw new \InvalidArgumentException('Length of password must be at least 6 characters');
 
         if ($hash)

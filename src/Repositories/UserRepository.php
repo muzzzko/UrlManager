@@ -19,7 +19,7 @@ class UserRepository extends AbstractRepository
 
         $user = new User(
             $user->getName(),
-            new Password($user->getPassword(), false),
+            new Password($user->getPassword(), false, false),
             $user->getEmail(),
             $this->dbConnection->lastInsertId()
         );
@@ -35,7 +35,7 @@ class UserRepository extends AbstractRepository
         );
 
         return $row[0] !== null ?
-            new User($row[0], new Password($row[1], false), $row[2], $row[3]) :
+            new User($row[0], new Password($row[1], false, false), $row[2], $row[3]) :
             null;
     }
 }
