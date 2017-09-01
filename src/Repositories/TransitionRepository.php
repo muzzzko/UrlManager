@@ -5,14 +5,14 @@ use UrlManager\Repositories\AbstractRepository;
 
 class TransitionRepository extends AbstractRepository
 {
-    public function fixTransition($id)
+    public function fixTransition($id, $referer)
     {
         $this->dbConnection->executeQuery(
             'insert into Transitions(urlId, dateTransition, referer) values(?, ?, ?)',
             [
                 $id,
                 new \Datetime('now', new \DateTimeZone('UTC')),
-                $_SERVER['HTTP_REFERER']
+                $referer
             ],
             [
                 \PDO::PARAM_INT,

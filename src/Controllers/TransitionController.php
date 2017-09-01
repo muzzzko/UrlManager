@@ -28,7 +28,7 @@ class TransitionController extends AbstractController
 
 
 
-    public function fixTransition($hash)
+    public function fixTransition(Request $request, $hash)
     {
         $shortenUrl = $this->urlService->getShortenUrlByHash($hash);
 
@@ -39,7 +39,10 @@ class TransitionController extends AbstractController
             );
         }
 
-        $this->transitionService->fixTransition($shortenUrl->getId());
+        $this->transitionService->fixTransition(
+            $shortenUrl->getId(),
+            $request->headers->get('Referer')
+        );
 
         return new JsonResponse (
             ['url' => $shortenUrl->getSourceUrl()],
@@ -104,6 +107,7 @@ class TransitionController extends AbstractController
         } catch (\Exception $e) {
             return $this->createErrorResponse('Date is wrong');
         }
+
 
         return new JsonResponse (
             $countTransitionsGroupByDays
@@ -189,10 +193,10 @@ class TransitionController extends AbstractController
         $fromDate = $request->query->get('from_date');
         $toDate = $request->query->get('to_date');
 
-        if (($toDate !== null && strlen($toDate) != 10) ||
-            ($froDate !== null && strlen($fromDate) != 10)) throw new \Exception();
+        if ((isset($toDate) && strlen($toDate) != 10) ||
+            (isset($froDate) && strlen($fromDate) != 10)) throw new \Exception();
 
-        if ($toDate === null) {
+        if (!isset($toDate)) {
             $toDate = \DateTime::createFromFormat(
                 'Y-m-d',
                 (new \DateTime('now',new \DateTimeZone('UTC')))->format('Y-m-d')
@@ -201,7 +205,7 @@ class TransitionController extends AbstractController
             $toDate = \DateTime::createFromFormat('Y-m-d',$toDate);
         }
 
-        if ($fromDate === null) {
+        if (!isset($fromDate)) {
             $fromDate = clone $toDate;
             $fromDate->modify('-7 days');
         } else {

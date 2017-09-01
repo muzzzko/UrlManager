@@ -10,12 +10,12 @@ class User
 
 
 
-    public function __construct($name, $password, $email, $id = null)
+    public function __construct($name,Password $password, $email, $id = null)
     {
         if ($name === '')
             throw new \InvalidArgumentException('Name is clear');
 
-        if (strlen($password) < 6)
+        if (strlen($password->getPassword()) < 6)
             throw new \InvalidArgumentException('Length of password must be at least 6 characters');
 
         if (!filter_var($email,FILTER_VALIDATE_EMAIL))
@@ -36,7 +36,7 @@ class User
 
     public function getPassword()
     {
-        return $this->password;
+        return $this->password->getPassword();
     }
 
     public function getEmail()

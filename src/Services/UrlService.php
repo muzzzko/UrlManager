@@ -5,7 +5,6 @@ use UrlManager\Repositories\UrlRepository;
 use UrlManager\Models\ShortenUrl;
 use UrlManager\Models\User;
 
-
 class UrlService
 {
     private $urlRepository;

@@ -1,18 +1,18 @@
 <?php
-namespace UrlManager\Tests\ModelTest;
+namespace UrlManager\tests\ModelTest;
 
 use PHPUnit\Framework\TestCase;
 use UrlManager\Models\User;
+use UrlManager\Models\Password;
 
 class UserTest extends TestCase
 {
     public function dataTestConstruct()
     {
         return [
-          ['','','',true],
-          ['name','','',true],
-          ['name','password','',true],
-          ['name','password','name@mail.ru',false],
+          ['',new Password('Password'),'',true],
+          ['name',new Password('password'),'',true],
+          ['name',new Password('password'),'name@mail.ru',false],
         ];
     }
 
@@ -36,7 +36,7 @@ class UserTest extends TestCase
                 ],
                 [
                     $name,
-                    $password,
+                    $password->getPassword(),
                     $email
                 ]
             );

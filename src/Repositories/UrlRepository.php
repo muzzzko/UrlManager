@@ -4,6 +4,7 @@ namespace UrlManager\Repositories;
 use UrlManager\Repositories\AbstractRepository;
 use UrlManager\Models\ShortenUrl;
 use UrlManager\Models\User;
+use UrlManager\Models\Password;
 
 class UrlRepository extends AbstractRepository
 {
@@ -41,7 +42,8 @@ class UrlRepository extends AbstractRepository
         foreach ($rows as $row) {
             $shortenUrls[] = new ShortenUrl(
                 $row['sourceUrl'],
-                $user, $row['id'],
+                $user,
+                $row['id'],
                 $row['hash']
             );
         }
@@ -62,10 +64,35 @@ class UrlRepository extends AbstractRepository
 
     public function deleteUserShortenUrl($id)
     {
-        $this->dbConnection->executeQuery(
+        $this->dbConnection->setAutoCommit(false);
+        $this->dbConnection->beginTransaction();
+
+        $result = $this->dbConnection->executeQuery(
             'delete from Urls where id = ?',
             [$id]
         );
+
+        if (!$result->errorInfo()) {
+            $this->dbConnection->roolBack();
+            $this->dbConnection->setAutoCommit(true);
+            return false;
+        }
+
+        $result = $this->dbConnection->executeQuery(
+            'delete from Transitions where urlId = ?',
+            [$id]
+        );
+
+        if (!$result->errorInfo()) {
+            $this->dbConnection->roolBack();
+            $this->dbConnection->setAutoCommit(true);
+            return false;
+        }
+
+        $this->dbConnection->commit();
+        $this->dbConnection->setAutoCommit(true);
+        return true;
+
     }
 
     public function getShortenUrlByHash($hash)
@@ -78,7 +105,9 @@ class UrlRepository extends AbstractRepository
 
         if ($row == null) return $row;
 
-        $user = new User($row['name'], $row['password'], $row['email'], $row['userId']);
+        $password = new Password($row['password'], false);
+
+        $user = new User($row['name'], $password, $row['email'], $row['userId']);
 
         $shortenUrl = new ShortenUrl($row['sourceUrl'], $user, $row['id'], $row['hash']);
 

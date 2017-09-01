@@ -41,8 +41,8 @@ class TransitionService
         return $this->transitionRepository->getTopReferer($id);
     }
 
-    public function fixTransition($id)
+    public function fixTransition($id, $referer)
     {
-        $this->transitionRepository->fixTransition($id);
+        $this->transitionRepository->fixTransition($id, $referer);
     }
 }

@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UrlManager\Services\UserService;
+use UrlManager\Models\Password;
 
 class AbstractController
 {
@@ -23,11 +24,12 @@ class AbstractController
     protected function getUserByAuthorization(Request $request)
     {
         $email = $request->server->get('PHP_AUTH_USER');
-        $password = $request->server->get('PHP_AUTH_PW');
+        $password = new Password($request->server->get('PHP_AUTH_PW'));
 
         $user = $this->userService->getUserByEmail($email);
 
-        return ($user !== null && $user->getPassword() === $password) ? $user : false;
+        return ($user !== null &&
+                $user->getPassword() === $password->getPassword()) ? $user : false;
     }
 
     protected function createUnauthorizedResponse()

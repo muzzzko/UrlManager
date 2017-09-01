@@ -132,12 +132,18 @@ class UrlController extends AbstractController
                 return $this->createUnauthorizedResponse();
             }
 
-            $this->urlService->deleteUserShortenUrl($id);
+            $result = $this->urlService->deleteUserShortenUrl($id);
 
         } catch (\InvalidArgumentException $e) {
             return $this->createErrorResponse($e->getMessage());
         }
 
-        return new JsonResponse();
+        if ($result) {
+            return new JsonResponse();
+        } else {
+            return new JsonResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }
