@@ -35,7 +35,7 @@ class TransitionController extends AbstractController
         if ($shortenUrl == null) {
             return new JsonResponse(
                 [],
-                Response::NOT_FOUND
+                Response::HTTP_NO_CONTENT
             );
         }
 
@@ -45,8 +45,9 @@ class TransitionController extends AbstractController
         );
 
         return new JsonResponse (
-            ['url' => $shortenUrl->getSourceUrl()],
-            RedirectResponse::HTTP_TEMPORARY_REDIRECT
+            [],
+            RedirectResponse::HTTP_TEMPORARY_REDIRECT,
+            ['LOCATION' => $shortenUrl->getSourceUrl()]
         );
     }
 

@@ -173,8 +173,7 @@ class ShortenUrlTest extends WebTestCase
             'GET',
             '/api/v1/users/me/shorten_urls/'.$id.'/days',
             [
-                'from_date' => '2016-08-10',
-                'to_date' => '2017-09-01'
+                'from_date' => '2016-08-10'
             ],
             [],
             [
@@ -193,8 +192,7 @@ class ShortenUrlTest extends WebTestCase
             'GET',
             '/api/v1/users/me/shorten_urls/'.$id.'/hours',
             [
-                'from_date' => '2016-08-10',
-                'to_date' => '2017-09-01'
+                'from_date' => '2016-08-10'
             ],
             [],
             [
@@ -213,8 +211,7 @@ class ShortenUrlTest extends WebTestCase
             'GET',
             '/api/v1/users/me/shorten_urls/'.$id.'/mins',
             [
-                'from_date' => '2016-08-10',
-                'to_date' => '2017-09-01'
+                'from_date' => '2016-08-10'
             ],
             [],
             [
